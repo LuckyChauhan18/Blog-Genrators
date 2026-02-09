@@ -1,34 +1,55 @@
-from gradio_client import Client
+import os
+import base64
 from pathlib import Path
-import shutil
+from dotenv import load_dotenv
 
-print("🔑 Hugging Face setup ready")
+load_dotenv()
 
-# 1️⃣ Create client FIRST
-SPACE_ID = "hysts/SDXL"
-client = Client(SPACE_ID)
+def generate_image(prompt, output_file="gemini_generated.png"):
+    """
+    Generates image bytes using Gemini Imagen.
+    Requires:
+      pip install google-genai
+      env: GOOGLE_API_KEY
+    """
+    from google import genai
+    from google.genai import types
 
-print("Loaded as API:", client.src)
-print("🎨 Generating image via Hugging Face Space...")
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    if not api_key:
+        print("❌ GOOGLE_API_KEY not found in environment")
+        return
 
-# 2️⃣ Call predict
-result = client.predict(
-    "image of transformer in a futuristic cityscape at sunset, vibrant colors, cinematic lighting, highly detailed",
-    api_name="/predict",
-)
+    print("🚀 Initializing Gemini Client...")
+    client = genai.Client(api_key=api_key)
 
-print("🧠 Raw result:", result)
+    print(f"🎨 Generating image for prompt: '{prompt}'...")
+    try:
+        result = client.models.generate_images(
+            model="imagen-3.0-generate-001",
+            prompt=prompt,
+            config=types.GenerateImagesConfig(
+                number_of_images=1,
+                aspect_ratio="16:9",
+                safety_filter_level="BLOCK_ONLY_HIGH",
+            ),
+        )
 
-out = Path("hf_generated.webp")
+        if not result.images:
+            print("❌ No image returned by Imagen")
+            return
 
-# 3️⃣ Handle local temp file (your case)
-if isinstance(result, str) and Path(result).exists():
-    print("📁 Image returned as local temp file")
-    shutil.copy(result, out)
+        # Imagen returns base64
+        image_base64 = result.images[0].image_bytes
+        img_bytes = base64.b64decode(image_base64)
+        
+        Path(output_file).write_bytes(img_bytes)
+        print(f"✅ Image saved to {output_file}")
+        print(f"📂 Location: {os.path.abspath(output_file)}")
 
-else:
-    raise RuntimeError("❌ Unexpected response format")
+    except Exception as e:
+        print(f"❌ Error generating image: {e}")
 
-print("✅ IMAGE GENERATED SUCCESSFULLY")
-print("📂 Saved at:", out.resolve())
-print("📏 Size:", out.stat().st_size, "bytes")
+if __name__ == "__main__":
+    prompt = "image of transformer in a futuristic cityscape at sunset, vibrant colors, cinematic lighting, highly detailed"
+    generate_image(prompt)

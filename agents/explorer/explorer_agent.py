@@ -9,7 +9,7 @@ from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from schemas import TrendingTopics
+from .schemas import TrendingTopics
 
 # --------------------------------------------------
 # Environment

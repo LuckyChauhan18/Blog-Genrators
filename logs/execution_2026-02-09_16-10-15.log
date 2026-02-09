@@ -1,0 +1,7 @@
+📝 Logging execution to: logs\execution_2026-02-09_16-10-15.log
+Traceback (most recent call last):
+  File "C:\Users\Lucky\OneDrive\Desktop\AI\Blog Genrator\run\run_daily_blogs.py", line 46, in <module>
+    from agents.explorer.explorer_agent import run_explorer_agent
+  File "C:\Users\Lucky\OneDrive\Desktop\AI\Blog Genrator\agents\explorer\explorer_agent.py", line 12, in <module>
+    from schemas import TrendingTopics
+ModuleNotFoundError: No module named 'schemas'

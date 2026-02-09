@@ -1,0 +1,17 @@
+📝 Logging execution to: logs\execution_2026-02-09_16-10-57.log
+
+🚀 One-Click Blog Run Started [2026-02-09_16-10-57]
+
+🔍 Running Explorer Agent...
+C:\Users\Lucky\OneDrive\Desktop\AI\Blog Genrator\agents\explorer\explorer_agent.py:62: LangChainDeprecationWarning: The class `TavilySearchResults` was deprecated in LangChain 0.3.25 and will be removed in 1.0. An updated version of the class exists in the `langchain-tavily package and should be used instead. To use it run `pip install -U `langchain-tavily` and import as `from `langchain_tavily import TavilySearch``.
+  tool = TavilySearchResults(max_results=max_results)
+📊 Found 12 topics.
+
+▶️ (1/1) Processing Topic: Latest AI News and AI Breakthroughs that Matter Most
+   Category: ai, Score: 0
+🚀 [Runner] Starting generation for: Latest AI News and AI Breakthroughs that Matter Most
+🧠 IMAGE SPECS: [ImageSpec(placeholder='[[IMAGE_1]]', filename='ai_breakthroughs_diagram.png', alt='Diagram of AI breakthroughs', caption='Overview of recent AI breakthroughs in generative models, NLP, and ethics.', prompt='Create a diagram illustrating the recent breakthroughs in AI technology, including generative models, natural language processing improvements, and ethical AI frameworks. Use clear labels and a flowchart style.', size='1024x1024', quality='high'), ImageSpec(placeholder='[[IMAGE_2]]', filename='ai_healthcare_innovations.png', alt='AI innovations in healthcare', caption='AI applications in healthcare, including diagnostic tools and patient management systems.', prompt='Design a visual representation of AI innovations in healthcare, highlighting diagnostic tools, AI chatbots, and predictive analytics. Include icons and brief descriptions for each application.', size='1024x1024', quality='high'), ImageSpec(placeholder='[[IMAGE_3]]', filename='ai_policy_changes_table.png', alt='Table of AI policy changes', caption='Summary of recent AI policy changes and their implications.', prompt='Create a table summarizing recent AI policy changes, including the European Union regulations, their focus areas, and potential impacts on AI development.', size='1024x1024', quality='high')]
+✅ [Runner] Blog generated: Latest AI News and AI Breakthroughs that Matter Most
+
+✅ One-Click Blog Run Finished
+
